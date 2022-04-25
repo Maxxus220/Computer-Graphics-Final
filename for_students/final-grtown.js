@@ -17,6 +17,8 @@
 
 import { GrWorld } from "../libs/CS559-Framework/GrWorld.js";
 import { WorldUI } from "../libs/CS559-Framework/WorldUI.js";
+import { GrCustomRect } from "../libs/GrCustomRect.js";
+import * as T from "../libs/CS559-Three/build/three.module.js";
 
 import {main} from "../examples/main.js";
 
@@ -24,6 +26,8 @@ import {main} from "../examples/main.js";
  * The Graphics Town Main -
  * This builds up the world and makes it go...
  */
+let skyscraper_tex = new T.TextureLoader().load("./images/SkyscraperBandW.png");
+let skyscraper_mat = new T.MeshStandardMaterial({map:skyscraper_tex});
 
 // make the world
 let world = new GrWorld({
@@ -35,7 +39,18 @@ let world = new GrWorld({
 // put stuff into the world
 // this calls the example code (that puts a lot of objects into the world)
 // you can look at it for reference, but do not use it in your assignment
-main(world);
+//main(world);
+let sky1 = new GrCustomRect({l:1,w:1,h:10,mat:skyscraper_mat,x:0,y:4,z:0});
+let sky_uvs = new Float32Array([
+    0.5,0,0.5,1,0,0,0,1,0,0,0.5,1,
+    0.5,0,0.5,1,0,0,0,1,0,0,0.5,1,
+    0.5,0,0.5,1,0,0,0,1,0,0,0.5,1,
+    0.5,0,0.5,1,0,0,0,1,0,0,0.5,1,
+    0.5,0,0.5,1,1,0,0.5,0,0.5,1,1,0,
+    0.5,0,0.5,1,0,0,0,1,0,0,0.5,1
+])
+sky1.rect.geometry.setAttribute("uv",new T.BufferAttribute(sky_uvs,2));
+world.add(sky1);
 
 // while making your objects, be sure to identify some of them as "highlighted"
 
@@ -51,10 +66,10 @@ function highlight(obName) {
     }
 }
 // of course, the student should highlight their own objects, not these
-highlight("SimpleHouse-5");
-highlight("Helicopter-0");
-highlight("Track Car");
-highlight("MorphTest");
+//highlight("SimpleHouse-5");
+//highlight("Helicopter-0");
+//highlight("Track Car");
+//highlight("MorphTest");
 
 ///////////////////////////////////////////////////////////////
 // build and run the UI
