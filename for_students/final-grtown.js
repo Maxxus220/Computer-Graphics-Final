@@ -22,9 +22,10 @@ import { GrCustomRect } from "../libs/GrCustomRect.js";
 import * as T from "../libs/CS559-Three/build/three.module.js";
 import { shaderMaterial } from "../libs/CS559-Framework/shaderHelper.js";
 import { OBJLoader } from "../libs/CS559-Three/examples/jsm/loaders/OBJLoader.js";
+import { MTLLoader } from "../libs/CS559-Three/examples/jsm/loaders/MTLLoader.js";
 
 import {main} from "../examples/main.js";
-import { Vector3 } from "../libs/CS559-Three/build/three.module.js";
+import { ObjectSpaceNormalMap, Vector3 } from "../libs/CS559-Three/build/three.module.js";
 
 /**m
  * The Graphics Town Main -
@@ -49,17 +50,23 @@ let world = new GrWorld({
 });
 world.objects[0].objects[0].material = groundMat;
 
-new OBJLoader().load("./objects/Ford Ka.obj",function(object) {
-    object.position.y = 2;
-    //object.scale.set(new Vector3(0.5,0.5,0.5));
+let carLoader = new OBJLoader();
+new MTLLoader().load("./objects/Car.mtl",function(materials){
+    carLoader.setMaterials(materials);
+});
+carLoader.load("./objects/Car.obj",function(object) {
+    object.scale.set(0.35,0.35,0.35);
+    object.position.x = 2;
+    object.rotateY((3*Math.PI)/2);
     world.add(new GrObject("Car1", object));
 });
+
 
 // put stuff into the world
 // this calls the example code (that puts a lot of objects into the world)
 // you can look at it for reference, but do not use it in your assignment
 //main(world);
-let sky1_bw = new GrCustomRect({l:1,w:1,h:10,mat:skyscraper_mat_bw,x:-5,y:4,z:0});
+let sky1_bw = new GrCustomRect({l:2,w:2,h:10,mat:skyscraper_mat_bw,x:-5,y:4,z:2});
 let sky_uvs = new Float32Array([
     0.5,0,0.5,1,0,0,0,1,0,0,0.5,1,
     0.5,0,0.5,1,0,0,0,1,0,0,0.5,1,
@@ -71,10 +78,43 @@ let sky_uvs = new Float32Array([
 sky1_bw.rect.geometry.setAttribute("uv",new T.BufferAttribute(sky_uvs,2));
 world.add(sky1_bw);
 
+let sky2_bw = new GrObject("Sky_bw_2",sky1_bw.rect.clone());
+sky2_bw.objects[0].translateX(-2.5);
+world.add(sky2_bw);
+let sky3_bw = new GrObject("Sky_bw_3",sky2_bw.objects[0].clone());
+sky3_bw.objects[0].translateX(-2.5);
+world.add(sky3_bw);
+let sky4_bw = new GrObject("Sky_bw_4",sky3_bw.objects[0].clone());
+sky4_bw.objects[0].translateX(-2.5);
+world.add(sky4_bw);
+let sky5_bw = new GrObject("Sky_bw_5",sky4_bw.objects[0].clone());
+sky5_bw.objects[0].translateX(-2.5);
+world.add(sky5_bw);
+let sky6_bw = new GrObject("Sky_bw_6",sky5_bw.objects[0].clone());
+sky6_bw.objects[0].translateX(-2.5);
+world.add(sky6_bw);
+
 let sky1_cl = new GrObject("Sky_cl_1",sky1_bw.rect.clone());
 sky1_cl.objects[0].material = skyscraper_mat_cl;
 sky1_cl.objects[0].position.x = 5;
+sky1_cl.objects[0].position.z = -2;
 world.add(sky1_cl);
+
+let sky2_cl = new GrObject("Sky_cl_2",sky1_cl.objects[0].clone());
+sky2_cl.objects[0].translateX(2.5);
+world.add(sky2_cl);
+let sky3_cl = new GrObject("Sky_cl_3",sky2_cl.objects[0].clone());
+sky3_cl.objects[0].translateX(2.5);
+world.add(sky3_cl);
+let sky4_cl = new GrObject("Sky_cl_4",sky3_cl.objects[0].clone());
+sky4_cl.objects[0].translateX(2.5);
+world.add(sky4_cl);
+let sky5_cl = new GrObject("Sky_cl_5",sky4_cl.objects[0].clone());
+sky5_cl.objects[0].translateX(2.5);
+world.add(sky5_cl);
+let sky6_cl = new GrObject("Sky_cl_6",sky5_cl.objects[0].clone());
+sky6_cl.objects[0].translateX(2.5);
+world.add(sky6_cl);
 
 
 
