@@ -23,9 +23,9 @@ import * as T from "../libs/CS559-Three/build/three.module.js";
 import { shaderMaterial } from "../libs/CS559-Framework/shaderHelper.js";
 import { OBJLoader } from "../libs/CS559-Three/examples/jsm/loaders/OBJLoader.js";
 import { MTLLoader } from "../libs/CS559-Three/examples/jsm/loaders/MTLLoader.js";
+import { GrStep } from "./GrStep.js";
 
 import {main} from "../examples/main.js";
-import { ObjectSpaceNormalMap, Vector3 } from "../libs/CS559-Three/build/three.module.js";
 
 /**m
  * The Graphics Town Main -
@@ -50,6 +50,7 @@ let world = new GrWorld({
 });
 world.objects[0].objects[0].material = groundMat;
 
+// Car
 let carLoader = new OBJLoader();
 new MTLLoader().load("./objects/Car.mtl",function(materials){
     carLoader.setMaterials(materials);
@@ -58,7 +59,14 @@ carLoader.load("./objects/Car.obj",function(object) {
     object.scale.set(0.35,0.35,0.35);
     object.position.x = 2;
     object.rotateY((3*Math.PI)/2);
-    world.add(new GrObject("Car1", object));
+    let updateF = function(time, obj) {
+        let theta = time/1000;
+        obj.position.x = 2.5 * Math.cos(theta);
+        obj.position.z = 2.5 * Math.sin(theta);
+    }
+    let carGr = new GrStep(object, updateF);
+    carGr.highlighted = true;
+    world.add(carGr);
 });
 
 
@@ -66,6 +74,8 @@ carLoader.load("./objects/Car.obj",function(object) {
 // this calls the example code (that puts a lot of objects into the world)
 // you can look at it for reference, but do not use it in your assignment
 //main(world);
+
+// Skyscrapers
 let sky1_bw = new GrCustomRect({l:2,w:2,h:10,mat:skyscraper_mat_bw,x:-5,y:4,z:2});
 let sky_uvs = new Float32Array([
     0.5,0,0.5,1,0,0,0,1,0,0,0.5,1,
@@ -116,7 +126,25 @@ let sky6_cl = new GrObject("Sky_cl_6",sky5_cl.objects[0].clone());
 sky6_cl.objects[0].translateX(2.5);
 world.add(sky6_cl);
 
+// Road
+let roadCircleGeom = new T.RingBufferGeometry(2,3, 50);
+let roadCircleMat = new T.MeshStandardMaterial({color: "black"});
+let roadCircleObj = new T.Mesh(roadCircleGeom,roadCircleMat);
+roadCircleObj.rotateX(-Math.PI/2);
+roadCircleObj.position.y = 0.01;
+world.add(new GrObject("RoadCircle-1",roadCircleObj));
 
+let roadRGeom = new T.BoxBufferGeometry(18,0.01,1);
+let roadRMat = new T.MeshStandardMaterial({color:"#fc3d03"});
+let roadRObj = new T.Mesh(roadRGeom,roadRMat);
+roadRObj.position.x = 11;
+world.add(new GrObject("RoadR-1",roadRObj));
+
+let roadLGeom = new T.BoxBufferGeometry(18,0.01,1);
+let roadLMat = new T.MeshStandardMaterial({color:"grey"});
+let roadLObj = new T.Mesh(roadLGeom,roadLMat);
+roadLObj.position.x = -11;
+world.add(new GrObject("RoadL-1",roadLObj));
 
 // while making your objects, be sure to identify some of them as "highlighted"
 
