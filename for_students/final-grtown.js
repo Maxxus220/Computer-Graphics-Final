@@ -141,19 +141,21 @@ world.objects[0].objects[0].material = groundMat;
     let roadCircleMat = new T.MeshStandardMaterial({color: "black"});
     let roadCircleObj = new T.Mesh(roadCircleGeom,roadCircleMat);
     roadCircleObj.rotateX(-Math.PI/2);
-    roadCircleObj.position.y = 0.02;
+    roadCircleObj.position.y = 0.03;
     world.add(new GrObject("RoadCircle-1",roadCircleObj));
 
     let roadRGeom = new T.BoxBufferGeometry(17,0.01,1);
     let roadRMat = new T.MeshStandardMaterial({color:"#fc3d03"});
     let roadRObj = new T.Mesh(roadRGeom,roadRMat);
     roadRObj.position.x = 11;
+    roadRObj.position.y = 0.005;
     world.add(new GrObject("RoadR-1",roadRObj));
 
     let roadLGeom = new T.BoxBufferGeometry(17,0.01,1);
     let roadLMat = new T.MeshStandardMaterial({color:"grey"});
     let roadLObj = new T.Mesh(roadLGeom,roadLMat);
     roadLObj.position.x = -11;
+    roadLObj.position.y = 0.005;
     world.add(new GrObject("RoadL-1",roadLObj));
 //#endregion
 
@@ -291,11 +293,13 @@ world.objects[0].objects[0].material = groundMat;
     let roadbw1 = new T.Mesh(road1_geom,roadbw_mat);
     roadbw1.position.x = -9;
     roadbw1.position.z = -5.5;
+    roadbw1.position.y = 0.005;
     let roadbw2 = roadbw1.clone();
     roadbw2.position.z = -12.5;
     let roadbw3 = new T.Mesh(road2_geom,roadbw_mat);
     roadbw3.position.x = -0.5;
     roadbw3.position.z = -9;
+    roadbw3.position.y = 0.005;
     world.add(new GrObject("Roadbw1",roadbw1));
     world.add(new GrObject("Roadbw2",roadbw2));
     world.add(new GrObject("Roadbw3",roadbw3));
@@ -304,11 +308,13 @@ world.objects[0].objects[0].material = groundMat;
     let roadcl1 = new T.Mesh(road1_geom,roadcl_mat);
     roadcl1.position.x = 9;
     roadcl1.position.z = 5.5;
+    roadcl1.position.y = 0.005;
     let roadcl2 = roadcl1.clone();
     roadcl2.position.z = 12.5;
     let roadcl3 = new T.Mesh(road2_geom,roadcl_mat);
     roadcl3.position.x = 0.5;
     roadcl3.position.z = 9;
+    roadcl3.position.y = 0.005;
     world.add(new GrObject("Roadcl1",roadcl1));
     world.add(new GrObject("Roadcl2",roadcl2));
     world.add(new GrObject("Roadcl3",roadcl3));
@@ -442,7 +448,7 @@ world.objects[0].objects[0].material = groundMat;
             obj.visible = true;
             t = t-6;
             obj.position.x = -17.5;
-            obj.position.z = -12.25 * (1-t) + -9.75 * t; 
+            obj.position.z = -12.25 * (1-t) + -10.5 * t; 
         }
         else {
             obj.visible = false;
@@ -459,7 +465,7 @@ world.objects[0].objects[0].material = groundMat;
             obj.visible = true;
             t = t-6;
             obj.position.x = 17.5;
-            obj.position.z = 12.25 * (1-t) + 9.75 * t; 
+            obj.position.z = 12.25 * (1-t) + 10.5 * t; 
         }
         else {
             obj.visible = false;
