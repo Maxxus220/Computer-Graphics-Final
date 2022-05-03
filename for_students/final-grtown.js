@@ -29,6 +29,7 @@ import * as B from "./buildings.js";
 import {main} from "../examples/main.js";
 import { GrCar } from "./car.js";
 import { GrCar_bw } from "./car.js";
+import { GrFrontLoader, GrFrontLoader_bw } from "./front_loader.js";
 
 /**m
  * The Graphics Town Main -
@@ -478,6 +479,15 @@ world.objects[0].objects[0].material = groundMat;
     world.add(passenger_cl);
 //#endregion
 
+//#region FrontLoaders
+    let frontloader_cl = new GrFrontLoader({size:0.5,x:7,z:-14});
+    frontloader_cl.objects[0].rotateY(Math.PI/1.5);
+    world.add(frontloader_cl);
+
+    let front_loader_bw = new GrFrontLoader_bw({size:0.5,x:-7,z:14});
+    front_loader_bw.objects[0].rotateY(-Math.PI/2.3);
+    world.add(front_loader_bw);
+//#endregion
 // while making your objects, be sure to identify some of them as "highlighted"
 
 ///////////////////////////////////////////////////////////////
