@@ -25,6 +25,7 @@ import { OBJLoader } from "../libs/CS559-Three/examples/jsm/loaders/OBJLoader.js
 import { MTLLoader } from "../libs/CS559-Three/examples/jsm/loaders/MTLLoader.js";
 import { GrStep } from "./GrStep.js";
 import * as B from "./buildings.js";
+import { AutoUI } from "../libs/CS559-Framework/AutoUI.js";
 
 import {main} from "../examples/main.js";
 import { GrCar } from "./car.js";
@@ -35,6 +36,7 @@ import { GrFrontLoader, GrFrontLoader_bw } from "./front_loader.js";
  * The Graphics Town Main -
  * This builds up the world and makes it go...
  */
+let div = document.getElementById("div1");
 
 //#region Skyscraper textures
     let skyscraper_tex_bw = new T.TextureLoader().load("./images/SkyscraperBandW.png");
@@ -58,17 +60,14 @@ import { GrFrontLoader, GrFrontLoader_bw } from "./front_loader.js";
 let world = new GrWorld({
     width: 800,
     height: 600,
-    groundplanesize: 20 // make the ground plane big enough for a world of stuff
+    groundplanesize: 20, // make the ground plane big enough for a world of stuff
+    where:div
 });
 world.objects[0].objects[0].material = groundMat;
 
 //#region Car
     let carMat = shaderMaterial("./shaders/car.vs","./shaders/car.fs");
     let carLoader = new OBJLoader();
-    /*new MTLLoader().load("./objects/Car.mtl",function(materials){
-        carMat = materials;
-        carLoader.setMaterials(materials);
-    });*/
     carLoader.load("./objects/Car.obj",function(object) {
         object.scale.set(0.35,0.35,0.35);
         object.position.x = 2;
@@ -86,6 +85,7 @@ world.objects[0].objects[0].material = groundMat;
             obj.lookAt(2.5 * Math.cos(theta + 0.1), 0, 2.5 * Math.sin(theta + 0.1));
         }
         let carGr = new GrStep(object, updateF);
+        carGr.rideable = carGr.objects[0];
         world.add(carGr);
     });
 //#endregion
@@ -116,15 +116,16 @@ world.objects[0].objects[0].material = groundMat;
         0.5,0,0.5,1,0,0,0,1,0,0,0.5,1
     ])
     sky1_bw.rect.geometry.setAttribute("uv",new T.BufferAttribute(sky_uvs,2));
+    sky1_bw.name = "Skyscraper_bw_0";
     world.add(sky1_bw);
 
     for(let i = 0; i < 5; i++) {
         let sky = sky1_bw.objects[0].clone();
         sky.translateX(-2.5*i - 2.5);
-        world.add(new GrObject(`Sky_bw_${i+2}`,sky));
+        world.add(new GrObject(`Skyscraper_bw_${i+1}`,sky));
     }
 
-    let sky1_cl = new GrObject("Sky_cl_1",sky1_bw.rect.clone());
+    let sky1_cl = new GrObject("Skyscraper_cl_0",sky1_bw.rect.clone());
     sky1_cl.objects[0].material = skyscraper_mat_cl;
     sky1_cl.objects[0].position.x = 5;
     sky1_cl.objects[0].position.z = -3;
@@ -133,7 +134,7 @@ world.objects[0].objects[0].material = groundMat;
     for(let i = 0; i < 5; i++) {
         let sky = sky1_cl.objects[0].clone();
         sky.translateX(2.5*i + 2.5);
-        world.add(new GrObject(`Sky_cl_${i+2}`,sky));
+        world.add(new GrObject(`Skyscraper_cl_${i+1}`,sky));
     }
 //#endregion
 
@@ -373,6 +374,8 @@ world.objects[0].objects[0].material = groundMat;
         }
     }
     let truck_cl = new GrStep(truck1.objects[0],truck_cl_update);
+    truck_cl.rideable = truck_cl.objects[0];
+    truck_cl.name = "Truck_cl";
     let truck2 = new GrCar_bw({size:1.4, y:0.07});
     let truck_bw_update = function(time,obj) {
         let t = (time/1000) % 12;
@@ -424,6 +427,8 @@ world.objects[0].objects[0].material = groundMat;
         }
     }
     let truck_bw = new GrStep(truck2.objects[0],truck_bw_update);
+    truck_bw.rideable = truck_bw.objects[0];
+    truck_bw.name = "Truck_bw";
     world.add(truck_cl);
     world.add(truck_bw);
     //#endregion
@@ -480,13 +485,25 @@ world.objects[0].objects[0].material = groundMat;
 //#endregion
 
 //#region FrontLoaders
-    let frontloader_cl = new GrFrontLoader({size:0.5,x:7,z:-14});
-    frontloader_cl.objects[0].rotateY(Math.PI/1.5);
-    world.add(frontloader_cl);
+    let front_loader_cl = new GrFrontLoader({size:0.5,x:7,z:-14});
+    front_loader_cl.objects[0].rotateY(Math.PI/4);
+    front_loader_cl.rideable = front_loader_cl.objects[0];
+    front_loader_cl.name = "Frontloader_cl";
+    world.add(front_loader_cl);
+    let f_cl_ui = new AutoUI(front_loader_cl, 300, div, 1, true);
+    f_cl_ui.set("x", 7);
+    f_cl_ui.set("z", -14);
+    f_cl_ui.set("theta",45);
 
     let front_loader_bw = new GrFrontLoader_bw({size:0.5,x:-7,z:14});
-    front_loader_bw.objects[0].rotateY(-Math.PI/2.3);
+    front_loader_bw.objects[0].rotateY(Math.PI + Math.PI/4);
+    front_loader_bw.rideable = front_loader_bw.objects[0];
+    front_loader_bw.name = "Frontloader_bw";
     world.add(front_loader_bw);
+    let f_bw_ui = new AutoUI(front_loader_bw, 300, div, 1, true);
+    f_bw_ui.set("x", -7);
+    f_bw_ui.set("z", 14);
+    f_bw_ui.set("theta",315);
 //#endregion
 // while making your objects, be sure to identify some of them as "highlighted"
 
@@ -502,8 +519,8 @@ function highlight(obName) {
     }
 }
 // of course, the student should highlight their own objects, not these
-//highlight("SimpleHouse-5");
-//highlight("Helicopter-0");
+highlight("Skyscraper_bw_0");
+highlight("Skyscraper_cl_0");
 //highlight("Track Car");
 //highlight("MorphTest");
 

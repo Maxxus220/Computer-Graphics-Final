@@ -95,8 +95,8 @@ export class GrFrontLoader extends GrObject {
     frontloader.add(wheel6);
 
     super(`Frontloader-${frontloaderObCtr++}`,frontloader, [
-      ["x",-10,10,0],
-      ["z",-10,10,0],
+      ["x",-20,20,0],
+      ["z",-20,20,0],
       ["theta",0,360,0],
       ["arm_rotate",0,70,0],
       ["load_rotate",-65,20,0]
@@ -205,8 +205,8 @@ export class GrFrontLoader_bw extends GrObject {
     frontloader.add(wheel6);
 
     super(`Frontloader-${frontloaderObCtr++}`,frontloader, [
-      ["x",-10,10,0],
-      ["z",-10,10,0],
+      ["x",-20,20,0],
+      ["z",-20,20,0],
       ["theta",0,360,0],
       ["arm_rotate",0,70,0],
       ["load_rotate",-65,20,0]
