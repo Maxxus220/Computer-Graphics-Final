@@ -1,10 +1,10 @@
 Three different behaviors that you made:
 1. Car in circle
-2. ???
+2. Trucks in multiple part path
 3. ???
 
 One behavior that is not simple:
-Not simple: ???
+Not simple: Trucks in multiple part path
 
 Animated Articulated Figure:
 Articulated: ???
