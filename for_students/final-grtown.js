@@ -317,39 +317,49 @@ world.objects[0].objects[0].material = groundMat;
 //#region Trucks
     let truck1 = new GrCar({size:1.4, y:0.07});
     let truck_cl_update = function(time,obj) {
-        let t = (time/1000) % 10;
-        if(t >= 0 && t < 2) {
-            t = t/2;
+        let t = (time/1000) % 12;
+        if(t >= 0 && t < 1) {
+            obj.position.x = 17.5;
+            obj.position.z = 5.5;
+            obj.lookAt(obj.position.x+1,obj.position.y,obj.position.z); 
+        }
+        else if(t >= 1 && t < 3) {
+            t = (t-1)/2;
             obj.position.x = 17.5 * (1-t) + 0.5 * t;
             obj.position.z = 5.5;
             obj.lookAt(obj.position.x-1,obj.position.y,obj.position.z); 
         }
-        else if(t >= 2 && t < 3) {
-            t = t - 2;
+        else if(t >= 3 && t < 4) {
+            t = t - 3;
             obj.position.x = 0.5;
             obj.position.z = 6 * (1-t) + 12 * t;
             obj.lookAt(obj.position.x,obj.position.y,obj.position.z+1);
         }
-        else if(t >= 3 && t < 5) {
-            t = (t - 3)/2;
+        else if(t >= 4 && t < 6) {
+            t = (t - 4)/2;
             obj.position.x = 0.5 * (1-t) + 17.5 * t;
             obj.position.z = 12.5;
             obj.lookAt(obj.position.x+1,obj.position.y,obj.position.z);
         }
-        else if(t >= 5 && t < 7) {
-            t = (t-5)/2;
+        else if(t >= 6 && t < 7) {
+            obj.position.x = 17.5;
+            obj.position.z = 12.5;
+            obj.lookAt(obj.position.x+1,obj.position.y,obj.position.z);
+        }
+        else if(t >= 7 && t < 9) {
+            t = (t-7)/2;
             obj.position.x = 17.5 * (1-t) + 0.5 * t;
             obj.position.z = 12.5;
             obj.lookAt(obj.position.x-1,obj.position.y,obj.position.z);
         }
-        else if(t >= 7 && t < 8) {
-            t = t-7;
+        else if(t >= 9 && t < 10) {
+            t = t-9;
             obj.position.x = 0.5;
             obj.position.z = 12 * (1-t) + 6 * t;
             obj.lookAt(obj.position.x,obj.position.y,obj.position.z-1);
         }
         else {
-            t = (t-8)/2;
+            t = (t-10)/2;
             obj.position.x = 0.5 * (1-t) + 17.5 * t;
             obj.position.z = 5.5;
             obj.lookAt(obj.position.x+1,obj.position.y,obj.position.z);
@@ -358,39 +368,49 @@ world.objects[0].objects[0].material = groundMat;
     let truck_cl = new GrStep(truck1.objects[0],truck_cl_update);
     let truck2 = new GrCar_bw({size:1.4, y:0.07});
     let truck_bw_update = function(time,obj) {
-        let t = (time/1000) % 10;
-        if(t >= 0 && t < 2) {
-            t = t/2;
+        let t = (time/1000) % 12;
+        if(t >= 0 && t < 1) {
+            obj.position.x = -17.5;
+            obj.position.z = -5.5;
+            obj.lookAt(obj.position.x-1,obj.position.y,obj.position.z);
+        }
+        else if(t >= 1 && t < 3) {
+            t = (t-1)/2;
             obj.position.x = -17.5 * (1-t) - 0.5 * t;
             obj.position.z = -5.5;
             obj.lookAt(obj.position.x+1,obj.position.y,obj.position.z); 
         }
-        else if(t >= 2 && t < 3) {
-            t = t - 2;
+        else if(t >= 3 && t < 4) {
+            t = t - 3;
             obj.position.x = -0.5;
             obj.position.z = -6 * (1-t) + -12 * t;
             obj.lookAt(obj.position.x,obj.position.y,obj.position.z-1);
         }
-        else if(t >= 3 && t < 5) {
-            t = (t - 3)/2;
+        else if(t >= 4 && t < 6) {
+            t = (t - 4)/2;
             obj.position.x = -0.5 * (1-t) - 17.5 * t;
             obj.position.z = -12.5;
             obj.lookAt(obj.position.x-1,obj.position.y,obj.position.z);
         }
-        else if(t >= 5 && t < 7) {
-            t = (t-5)/2;
+        else if(t >= 6 && t < 7) {
+            obj.position.x = -17.5;
+            obj.position.z = -12.5;
+            obj.lookAt(obj.position.x-1,obj.position.y,obj.position.z);
+        }
+        else if(t >= 7 && t < 9) {
+            t = (t-7)/2;
             obj.position.x = -17.5 * (1-t) + -0.5 * t;
             obj.position.z = -12.5;
             obj.lookAt(obj.position.x+1,obj.position.y,obj.position.z);
         }
-        else if(t >= 7 && t < 8) {
-            t = t-7;
+        else if(t >= 9 && t < 10) {
+            t = t-9;
             obj.position.x = -0.5;
             obj.position.z = -12 * (1-t) + -6 * t;
             obj.lookAt(obj.position.x,obj.position.y,obj.position.z+1);
         }
         else {
-            t = (t-8)/2;
+            t = (t-10)/2;
             obj.position.x = -0.5 * (1-t) - 17.5 * t;
             obj.position.z = -5.5;
             obj.lookAt(obj.position.x-1,obj.position.y,obj.position.z);
@@ -400,6 +420,57 @@ world.objects[0].objects[0].material = groundMat;
     world.add(truck_cl);
     world.add(truck_bw);
     //#endregion
+
+//#region Passengers
+    let passengerGeom = new T.BoxBufferGeometry(0.2,0.6,0.2);
+    let passenger_bw_mat = new T.MeshStandardMaterial({color:"rgb(0.07,0.07,0.07)"});
+    let passenger_cl_mat = new T.MeshStandardMaterial({color:"red"});
+
+    let passenger_bw_obj = new T.Mesh(passengerGeom,passenger_bw_mat);
+    let passenger_cl_obj = new T.Mesh(passengerGeom,passenger_cl_mat);
+    passenger_bw_obj.position.y = 0.3;
+    passenger_cl_obj.position.y = 0.3;
+
+    let passenger_bw_update = function(time,obj) {
+        let t = (time/1000) % 12;
+        if(t >= 0 && t < 1) {
+            obj.visible = true;
+            obj.position.x = -17.5;
+            obj.position.z = -3.5 * (1-t) + -5 * t; 
+        }
+        else if(t >= 6 && t < 7) {
+            obj.visible = true;
+            t = t-6;
+            obj.position.x = -17.5;
+            obj.position.z = -12.25 * (1-t) + -9.75 * t; 
+        }
+        else {
+            obj.visible = false;
+        }
+    }
+    let passenger_cl_update = function(time,obj) {
+        let t = (time/1000) % 12;
+        if(t >= 0 && t < 1) {
+            obj.visible = true;
+            obj.position.x = 17.5;
+            obj.position.z = 3.5 * (1-t) + 5 * t; 
+        }
+        else if(t >= 6 && t < 7) {
+            obj.visible = true;
+            t = t-6;
+            obj.position.x = 17.5;
+            obj.position.z = 12.25 * (1-t) + 9.75 * t; 
+        }
+        else {
+            obj.visible = false;
+        }
+    }
+
+    let passenger_bw = new GrStep(passenger_bw_obj,passenger_bw_update);
+    let passenger_cl = new GrStep(passenger_cl_obj,passenger_cl_update);
+    world.add(passenger_bw);
+    world.add(passenger_cl);
+//#endregion
 
 // while making your objects, be sure to identify some of them as "highlighted"
 
