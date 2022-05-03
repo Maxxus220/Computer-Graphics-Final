@@ -27,6 +27,8 @@ import { GrStep } from "./GrStep.js";
 import * as B from "./buildings.js";
 
 import {main} from "../examples/main.js";
+import { GrCar } from "./car.js";
+import { GrCar_bw } from "./car.js";
 
 /**m
  * The Graphics Town Main -
@@ -81,7 +83,6 @@ carLoader.load("./objects/Car.obj",function(object) {
         obj.lookAt(2.5 * Math.cos(theta + 0.1), 0, 2.5 * Math.sin(theta + 0.1));
     }
     let carGr = new GrStep(object, updateF);
-    carGr.highlighted = true;
     world.add(carGr);
 });
 
@@ -111,21 +112,11 @@ let sky_uvs = new Float32Array([
 sky1_bw.rect.geometry.setAttribute("uv",new T.BufferAttribute(sky_uvs,2));
 world.add(sky1_bw);
 
-let sky2_bw = new GrObject("Sky_bw_2",sky1_bw.rect.clone());
-sky2_bw.objects[0].translateX(-2.5);
-world.add(sky2_bw);
-let sky3_bw = new GrObject("Sky_bw_3",sky2_bw.objects[0].clone());
-sky3_bw.objects[0].translateX(-2.5);
-world.add(sky3_bw);
-let sky4_bw = new GrObject("Sky_bw_4",sky3_bw.objects[0].clone());
-sky4_bw.objects[0].translateX(-2.5);
-world.add(sky4_bw);
-let sky5_bw = new GrObject("Sky_bw_5",sky4_bw.objects[0].clone());
-sky5_bw.objects[0].translateX(-2.5);
-world.add(sky5_bw);
-let sky6_bw = new GrObject("Sky_bw_6",sky5_bw.objects[0].clone());
-sky6_bw.objects[0].translateX(-2.5);
-world.add(sky6_bw);
+for(let i = 0; i < 5; i++) {
+    let sky = sky1_bw.objects[0].clone();
+    sky.translateX(-2.5*i - 2.5);
+    world.add(new GrObject(`Sky_bw_${i+2}`,sky));
+}
 
 let sky1_cl = new GrObject("Sky_cl_1",sky1_bw.rect.clone());
 sky1_cl.objects[0].material = skyscraper_mat_cl;
@@ -133,21 +124,11 @@ sky1_cl.objects[0].position.x = 5;
 sky1_cl.objects[0].position.z = -3;
 world.add(sky1_cl);
 
-let sky2_cl = new GrObject("Sky_cl_2",sky1_cl.objects[0].clone());
-sky2_cl.objects[0].translateX(2.5);
-world.add(sky2_cl);
-let sky3_cl = new GrObject("Sky_cl_3",sky2_cl.objects[0].clone());
-sky3_cl.objects[0].translateX(2.5);
-world.add(sky3_cl);
-let sky4_cl = new GrObject("Sky_cl_4",sky3_cl.objects[0].clone());
-sky4_cl.objects[0].translateX(2.5);
-world.add(sky4_cl);
-let sky5_cl = new GrObject("Sky_cl_5",sky4_cl.objects[0].clone());
-sky5_cl.objects[0].translateX(2.5);
-world.add(sky5_cl);
-let sky6_cl = new GrObject("Sky_cl_6",sky5_cl.objects[0].clone());
-sky6_cl.objects[0].translateX(2.5);
-world.add(sky6_cl);
+for(let i = 0; i < 5; i++) {
+    let sky = sky1_cl.objects[0].clone();
+    sky.translateX(2.5*i + 2.5);
+    world.add(new GrObject(`Sky_cl_${i+2}`,sky));
+}
 
 // Road
 let roadCircleGeom = new T.RingBufferGeometry(2,3, 50);
@@ -173,48 +154,21 @@ world.add(new GrObject("RoadL-1",roadLObj));
 let bush1_cl = new GrCustomRect({l:0.6,w:1,h:0.6,mat:bush_mat_cl,x:5,z:-1.6,y:-0.7});
 world.add(bush1_cl);
 
-let bush2_cl = new GrObject("Bush2_cl", bush1_cl.rect.clone());
-bush2_cl.objects[0].translateX(2.5);
-world.add(bush2_cl);
-
-let bush3_cl = new GrObject("Bush3_cl", bush2_cl.objects[0].clone());
-bush3_cl.objects[0].translateX(2.5);
-world.add(bush3_cl);
-
-let bush4_cl = new GrObject("Bush4_cl", bush3_cl.objects[0].clone());
-bush4_cl.objects[0].translateX(2.5);
-world.add(bush4_cl);
-
-let bush5_cl = new GrObject("Bush5_cl", bush4_cl.objects[0].clone());
-bush5_cl.objects[0].translateX(2.5);
-world.add(bush5_cl);
-
-let bush6_cl = new GrObject("Bush6_cl", bush5_cl.objects[0].clone());
-bush6_cl.objects[0].translateX(2.5);
-world.add(bush6_cl);
+for(let i = 0; i < 5; i++) {
+    let bush = bush1_cl.rect.clone();
+    bush.translateX(2.5 * i + 2.5);
+    world.add(new GrObject(`Bush${i+2}_cl`,bush));
+}
 
 let bush1_bw = new GrCustomRect({l:0.6,w:1,h:0.6,mat:bush_mat_bw,x:-5,z:1.6,y:-0.7});
 world.add(bush1_bw);
 
-let bush2_bw = new GrObject("Bush2_bw", bush1_bw.rect.clone());
-bush2_bw.objects[0].translateX(-2.5);
-world.add(bush2_bw);
+for(let i = 0; i < 5; i++) {
+    let bush = bush1_bw.rect.clone();
+    bush.translateX(-2.5 * i -2.5);
+    world.add(new GrObject(`Bush${i+2}_bw`,bush));
+}
 
-let bush3_bw = new GrObject("Bush3_bw", bush2_bw.objects[0].clone());
-bush3_bw.objects[0].translateX(-2.5);
-world.add(bush3_bw);
-
-let bush4_bw = new GrObject("Bush4_bw", bush3_bw.objects[0].clone());
-bush4_bw.objects[0].translateX(-2.5);
-world.add(bush4_bw);
-
-let bush5_bw = new GrObject("Bush5_bw", bush4_bw.objects[0].clone());
-bush5_bw.objects[0].translateX(-2.5);
-world.add(bush5_bw);
-
-let bush6_bw = new GrObject("Bush6_bw", bush5_bw.objects[0].clone());
-bush6_bw.objects[0].translateX(-2.5);
-world.add(bush6_bw);
 
 // Buildings from wkbk8
 let b1_1_cl = new B.GrBuilding1();
@@ -227,6 +181,216 @@ for(let i = 0; i < 5; i++) {
     building.translateX(-2.5*i - 2.5);
     world.add(new GrObject(`b1_${i+2}_cl`,building));
 }
+
+let b1_1_bw = new B.GrBuilding1_bw();
+b1_1_bw.objects[0].position.set(-5,b1_1_bw.objects[0].position.y, 7);
+world.add(b1_1_bw);
+
+for(let i = 0; i <5; i++) {
+    let building = b1_1_bw.objects[0].clone();
+    building.translateX(-2.5*i - 2.5);
+    world.add(new GrObject(`b1_${i+2}_bw`,building));
+}
+
+let b2_1_cl = new B.GrBuilding2({size:1.2,y:0.28});
+b2_1_cl.objects[0].position.set(5,b2_1_cl.objects[0].position.y, 3);
+world.add(b2_1_cl);
+
+for(let i = 0; i < 4; i++) {
+    let building = b2_1_cl.objects[0].clone();
+    building.translateX(3.125*i + 3.125);
+    world.add(new GrObject(`b2_${i+2}_cl`,building));
+}
+
+let b2_7_cl = new B.GrBuilding2({size:1.2,y:0.28});
+b2_7_cl.objects[0].rotateY(Math.PI);
+b2_7_cl.objects[0].position.set(5,b2_7_cl.objects[0].position.y, 8);
+world.add(b2_7_cl);
+
+for(let i = 0; i < 4; i++) {
+    let building = b2_7_cl.objects[0].clone();
+    building.translateX(-3.125*i - 3.125);
+    world.add(new GrObject(`b2_${i+8}_cl`,building));
+}
+
+let b2_13_cl = new B.GrBuilding2({size:1.2,y:0.28});
+b2_13_cl.objects[0].position.set(5,b2_13_cl.objects[0].position.y, 10);
+world.add(b2_13_cl);
+
+for(let i = 0; i < 4; i++) {
+    let building = b2_13_cl.objects[0].clone();
+    building.translateX(3.125*i + 3.125);
+    world.add(new GrObject(`b2_${i+14}_cl`,building));
+}
+
+let b2_19_cl = new B.GrBuilding2({size:1.2,y:0.28});
+b2_19_cl.objects[0].rotateY(Math.PI);
+b2_19_cl.objects[0].position.set(5,b2_19_cl.objects[0].position.y, 15);
+world.add(b2_19_cl);
+
+for(let i = 0; i < 4; i++) {
+    let building = b2_19_cl.objects[0].clone();
+    building.translateX(-3.125*i - 3.125);
+    world.add(new GrObject(`b2_${i+20}_cl`,building));
+}
+
+let b2_1_bw = new B.GrBuilding2_bw({size:1.2,y:0.28});
+b2_1_bw.objects[0].position.set(-5,b2_1_bw.objects[0].position.y, -3);
+b2_1_bw.objects[0].rotateY(Math.PI);
+world.add(b2_1_bw);
+
+for(let i = 0; i < 4; i++) {
+    let building = b2_1_bw.objects[0].clone();
+    building.translateX(3.125*i + 3.125);
+    world.add(new GrObject(`b2_${i+2}_bw`,building));
+}
+
+let b2_7_bw = new B.GrBuilding2_bw({size:1.2,y:0.28});
+b2_7_bw.objects[0].position.set(-5,b2_7_bw.objects[0].position.y, -8);
+world.add(b2_7_bw);
+
+for(let i = 0; i < 4; i++) {
+    let building = b2_7_bw.objects[0].clone();
+    building.translateX(-3.125*i - 3.125);
+    world.add(new GrObject(`b2_${i+8}_bw`,building));
+}
+
+let b2_13_bw = new B.GrBuilding2_bw({size:1.2,y:0.28});
+b2_13_bw.objects[0].position.set(-5,b2_13_bw.objects[0].position.y, -10);
+b2_13_bw.objects[0].rotateY(Math.PI);
+world.add(b2_13_bw);
+
+for(let i = 0; i < 4; i++) {
+    let building = b2_13_bw.objects[0].clone();
+    building.translateX(3.125*i + 3.125);
+    world.add(new GrObject(`b2_${i+14}_bw`,building));
+}
+
+let b2_19_bw = new B.GrBuilding2_bw({size:1.2,y:0.28});
+b2_19_bw.objects[0].position.set(-5,b2_19_bw.objects[0].position.y, -15);
+world.add(b2_19_bw);
+
+for(let i = 0; i < 4; i++) {
+    let building = b2_19_bw.objects[0].clone();
+    building.translateX(-3.125*i - 3.125);
+    world.add(new GrObject(`b2_${i+20}_bw`,building));
+}
+
+// Some more roads
+let roadbw_mat = new T.MeshStandardMaterial({color:"white"});
+let road1_geom = new T.BoxBufferGeometry(18,0.01,1);
+let road2_geom = new T.BoxBufferGeometry(1,0.01,6);
+let roadbw1 = new T.Mesh(road1_geom,roadbw_mat);
+roadbw1.position.x = -9;
+roadbw1.position.z = -5.5;
+let roadbw2 = roadbw1.clone();
+roadbw2.position.z = -12.5;
+let roadbw3 = new T.Mesh(road2_geom,roadbw_mat);
+roadbw3.position.x = -0.5;
+roadbw3.position.z = -9;
+world.add(new GrObject("Roadbw1",roadbw1));
+world.add(new GrObject("Roadbw2",roadbw2));
+world.add(new GrObject("Roadbw3",roadbw3));
+
+let roadcl_mat = new T.MeshStandardMaterial({color:"#fc3d03"});
+let roadcl1 = new T.Mesh(road1_geom,roadcl_mat);
+roadcl1.position.x = 9;
+roadcl1.position.z = 5.5;
+let roadcl2 = roadcl1.clone();
+roadcl2.position.z = 12.5;
+let roadcl3 = new T.Mesh(road2_geom,roadcl_mat);
+roadcl3.position.x = 0.5;
+roadcl3.position.z = 9;
+world.add(new GrObject("Roadcl1",roadcl1));
+world.add(new GrObject("Roadcl2",roadcl2));
+world.add(new GrObject("Roadcl3",roadcl3));
+
+// Trucks
+
+let truck1 = new GrCar({size:1.4, y:0.07});
+let truck_cl_update = function(time,obj) {
+    let t = (time/1000) % 10;
+    if(t >= 0 && t < 2) {
+        t = t/2;
+        obj.position.x = 17.5 * (1-t) + 0.5 * t;
+        obj.position.z = 5.5;
+        obj.lookAt(obj.position.x-1,obj.position.y,obj.position.z); 
+    }
+    else if(t >= 2 && t < 3) {
+        t = t - 2;
+        obj.position.x = 0.5;
+        obj.position.z = 6 * (1-t) + 12 * t;
+        obj.lookAt(obj.position.x,obj.position.y,obj.position.z+1);
+    }
+    else if(t >= 3 && t < 5) {
+        t = (t - 3)/2;
+        obj.position.x = 0.5 * (1-t) + 17.5 * t;
+        obj.position.z = 12.5;
+        obj.lookAt(obj.position.x+1,obj.position.y,obj.position.z);
+    }
+    else if(t >= 5 && t < 7) {
+        t = (t-5)/2;
+        obj.position.x = 17.5 * (1-t) + 0.5 * t;
+        obj.position.z = 12.5;
+        obj.lookAt(obj.position.x-1,obj.position.y,obj.position.z);
+    }
+    else if(t >= 7 && t < 8) {
+        t = t-7;
+        obj.position.x = 0.5;
+        obj.position.z = 12 * (1-t) + 6 * t;
+        obj.lookAt(obj.position.x,obj.position.y,obj.position.z-1);
+    }
+    else {
+        t = (t-8)/2;
+        obj.position.x = 0.5 * (1-t) + 17.5 * t;
+        obj.position.z = 5.5;
+        obj.lookAt(obj.position.x+1,obj.position.y,obj.position.z);
+    }
+}
+let truck_cl = new GrStep(truck1.objects[0],truck_cl_update);
+let truck2 = new GrCar_bw({size:1.4, y:0.07});
+let truck_bw_update = function(time,obj) {
+    let t = (time/1000) % 10;
+    if(t >= 0 && t < 2) {
+        t = t/2;
+        obj.position.x = -17.5 * (1-t) - 0.5 * t;
+        obj.position.z = -5.5;
+        obj.lookAt(obj.position.x+1,obj.position.y,obj.position.z); 
+    }
+    else if(t >= 2 && t < 3) {
+        t = t - 2;
+        obj.position.x = -0.5;
+        obj.position.z = -6 * (1-t) + -12 * t;
+        obj.lookAt(obj.position.x,obj.position.y,obj.position.z-1);
+    }
+    else if(t >= 3 && t < 5) {
+        t = (t - 3)/2;
+        obj.position.x = -0.5 * (1-t) - 17.5 * t;
+        obj.position.z = -12.5;
+        obj.lookAt(obj.position.x-1,obj.position.y,obj.position.z);
+    }
+    else if(t >= 5 && t < 7) {
+        t = (t-5)/2;
+        obj.position.x = -17.5 * (1-t) + -0.5 * t;
+        obj.position.z = -12.5;
+        obj.lookAt(obj.position.x+1,obj.position.y,obj.position.z);
+    }
+    else if(t >= 7 && t < 8) {
+        t = t-7;
+        obj.position.x = -0.5;
+        obj.position.z = -12 * (1-t) + -6 * t;
+        obj.lookAt(obj.position.x,obj.position.y,obj.position.z+1);
+    }
+    else {
+        t = (t-8)/2;
+        obj.position.x = -0.5 * (1-t) - 17.5 * t;
+        obj.position.z = -5.5;
+        obj.lookAt(obj.position.x-1,obj.position.y,obj.position.z);
+    }
+}
+let truck_bw = new GrStep(truck2.objects[0],truck_bw_update);
+world.add(truck_cl);
+world.add(truck_bw);
 
 // while making your objects, be sure to identify some of them as "highlighted"
 
