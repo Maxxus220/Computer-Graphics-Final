@@ -10,11 +10,11 @@
 7. Passengers
 
 (Optional) Backup Objects (more objects that you created, in case the ones above don't count):
-- ???
+- Frontloader
 - ???
 - ???
 
-At least on of each type of object:
+At least one of each type of object:
 Building/structure: Skyscraper
 Vehicle: Car
 Natural Element: Bush
@@ -23,7 +23,7 @@ Object loaded from a model file:
 Model: Car
 
 An object with a shader that you wrote:
-ShaderObj: Car
+ShaderObj: Car/groundplane
 
 Other Objects that you would like to note:
 ???
