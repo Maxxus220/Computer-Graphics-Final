@@ -1,11 +1,11 @@
 (Required) Two kinds of objects created for this assignment:
-1. ???
-2. ???
+1. Skyscraper
+2. Bush
 
 (Required) Five other kinds of objects that you created (possibly in previous assignments):
-3. ???
-4. ???
-5. ???
+3. Road
+4. Building with red roof
+5. Building with gravel roof
 6. ???
 7. ???
 
@@ -15,15 +15,15 @@
 - ???
 
 At least on of each type of object:
-Building/structure: ???
-Vehicle: ???
-Natural Element: ???
+Building/structure: Skyscraper
+Vehicle: Car
+Natural Element: Bush
 
 Object loaded from a model file:
-Model: ???
+Model: Car
 
 An object with a shader that you wrote:
-ShaderObj: ???
+ShaderObj: Car
 
 Other Objects that you would like to note:
 ???
