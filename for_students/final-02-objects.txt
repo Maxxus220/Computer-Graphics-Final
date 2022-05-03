@@ -7,7 +7,7 @@
 4. Building with red roof
 5. Building with gravel roof
 6. Trucks
-7. ???
+7. Passengers
 
 (Optional) Backup Objects (more objects that you created, in case the ones above don't count):
 - ???
