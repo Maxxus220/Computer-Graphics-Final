@@ -120,16 +120,16 @@ world.objects[0].objects[0].material = groundMat;
         0.5,0,0.5,1,0,0,0,1,0,0,0.5,1
     ])
     sky1_bw.rect.geometry.setAttribute("uv",new T.BufferAttribute(sky_uvs,2));
-    sky1_bw.name = "Skyscraper_bw_0";
+    sky1_bw.name = "Skyscraper_0_bw";
     world.add(sky1_bw);
 
     for(let i = 0; i < 5; i++) {
         let sky = sky1_bw.objects[0].clone();
         sky.translateX(-2.5*i - 2.5);
-        world.add(new GrObject(`Skyscraper_bw_${i+1}`,sky));
+        world.add(new GrObject(`Skyscraper_${i+1}_bw`,sky));
     }
 
-    let sky1_cl = new GrObject("Skyscraper_cl_0",sky1_bw.rect.clone());
+    let sky1_cl = new GrObject("Skyscraper_0_cl",sky1_bw.rect.clone());
     sky1_cl.objects[0].material = skyscraper_mat_cl;
     sky1_cl.objects[0].position.x = 5;
     sky1_cl.objects[0].position.z = -3;
@@ -138,7 +138,7 @@ world.objects[0].objects[0].material = groundMat;
     for(let i = 0; i < 5; i++) {
         let sky = sky1_cl.objects[0].clone();
         sky.translateX(2.5*i + 2.5);
-        world.add(new GrObject(`Skyscraper_cl_${i+1}`,sky));
+        world.add(new GrObject(`Skyscraper_${i+1}_cl`,sky));
     }
 //#endregion
 
