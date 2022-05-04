@@ -91,6 +91,7 @@ world.objects[0].objects[0].material = groundMat;
         carGr.rideable = carGr.objects[0];
         carGr.name = "Car_0";
         world.add(carGr);
+        world.ui = new WorldUI(world);
     });
 //#endregion
 
@@ -451,7 +452,7 @@ world.objects[0].objects[0].material = groundMat;
 
 //#region Passengers
     let passengerGeom = new T.BoxBufferGeometry(0.2,0.6,0.2);
-    let passenger_bw_mat = new T.MeshStandardMaterial({color:"rgb(0.07,0.07,0.07)"});
+    let passenger_bw_mat = new T.MeshStandardMaterial({color:new T.Color(0.07,0.07,0.07)});
     let passenger_cl_mat = new T.MeshStandardMaterial({color:"red"});
 
     let passenger_bw_obj = new T.Mesh(passengerGeom,passenger_bw_mat);
@@ -508,20 +509,12 @@ world.objects[0].objects[0].material = groundMat;
     front_loader_cl.rideable = front_loader_cl.objects[0];
     front_loader_cl.name = "Frontloader_0_cl";
     world.add(front_loader_cl);
-    let f_cl_ui = new AutoUI(front_loader_cl, 300, div, 1, true);
-    f_cl_ui.set("x", 7);
-    f_cl_ui.set("z", -14);
-    f_cl_ui.set("theta",45);
 
     let front_loader_bw = new GrFrontLoader_bw({size:0.5,x:-7,z:14});
     front_loader_bw.objects[0].rotateY(Math.PI + Math.PI/4);
     front_loader_bw.rideable = front_loader_bw.objects[0];
     front_loader_bw.name = "Frontloader_0_bw";
     world.add(front_loader_bw);
-    let f_bw_ui = new AutoUI(front_loader_bw, 300, div, 1, true);
-    f_bw_ui.set("x", -7);
-    f_bw_ui.set("z", 14);
-    f_bw_ui.set("theta",315);
 //#endregion
 
 //#region Rain particle system
@@ -587,15 +580,15 @@ function highlight(obName) {
     }
 }
 // of course, the student should highlight their own objects, not these
-highlight("Skyscraper_bw_0");
-highlight("Skyscraper_cl_0");
-//highlight("Track Car");
-//highlight("MorphTest");
+highlight("Skyscraper_0_bw");
+highlight("Skyscraper_0_cl");
+highlight("Bush_0_cl");
+highlight("Bush_0_bw");
+
 
 ///////////////////////////////////////////////////////////////
 // build and run the UI
 // only after all the objects exist can we build the UI
 // @ts-ignore       // we're sticking a new thing into the world
-world.ui = new WorldUI(world);
 // now make it go!
 world.go();
