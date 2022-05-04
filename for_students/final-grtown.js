@@ -89,6 +89,7 @@ world.objects[0].objects[0].material = groundMat;
         }
         let carGr = new GrStep(object, updateF);
         carGr.rideable = carGr.objects[0];
+        carGr.name = "Car_0";
         world.add(carGr);
     });
 //#endregion
@@ -105,7 +106,7 @@ world.objects[0].objects[0].material = groundMat;
     sun.position.y = 20;
     sun.position.z = 20;
     sun.castShadow = true;
-    world.add(new GrObject("Sun",sun));
+    world.add(new GrObject("Sun_0",sun));
 //#endregion
 
 //#region Skyscrapers
@@ -147,45 +148,48 @@ world.objects[0].objects[0].material = groundMat;
     let roadCircleObj = new T.Mesh(roadCircleGeom,roadCircleMat);
     roadCircleObj.rotateX(-Math.PI/2);
     roadCircleObj.position.y = 0.03;
-    world.add(new GrObject("RoadCircle-1",roadCircleObj));
+    world.add(new GrObject("RoadCircle_0",roadCircleObj));
 
     let roadRGeom = new T.BoxBufferGeometry(17,0.01,1);
     let roadRMat = new T.MeshStandardMaterial({color:"#fc3d03"});
     let roadRObj = new T.Mesh(roadRGeom,roadRMat);
     roadRObj.position.x = 11;
     roadRObj.position.y = 0.005;
-    world.add(new GrObject("RoadR-1",roadRObj));
+    world.add(new GrObject("RoadR_0",roadRObj));
 
     let roadLGeom = new T.BoxBufferGeometry(17,0.01,1);
     let roadLMat = new T.MeshStandardMaterial({color:"grey"});
     let roadLObj = new T.Mesh(roadLGeom,roadLMat);
     roadLObj.position.x = -11;
     roadLObj.position.y = 0.005;
-    world.add(new GrObject("RoadL-1",roadLObj));
+    world.add(new GrObject("RoadL_0",roadLObj));
 //#endregion
 
 //#region Bushes
     let bush1_cl = new GrCustomRect({l:0.6,w:1,h:0.6,mat:bush_mat_cl,x:5,z:-1.6,y:-0.7});
+    bush1_cl.name = "Bush_0_cl";
     world.add(bush1_cl);
 
     for(let i = 0; i < 5; i++) {
         let bush = bush1_cl.rect.clone();
         bush.translateX(2.5 * i + 2.5);
-        world.add(new GrObject(`Bush${i+2}_cl`,bush));
+        world.add(new GrObject(`Bush_${i+1}_cl`,bush));
     }
 
     let bush1_bw = new GrCustomRect({l:0.6,w:1,h:0.6,mat:bush_mat_bw,x:-5,z:1.6,y:-0.7});
+    bush1_bw.name = "Bush_0_bw"
     world.add(bush1_bw);
 
     for(let i = 0; i < 5; i++) {
         let bush = bush1_bw.rect.clone();
         bush.translateX(-2.5 * i -2.5);
-        world.add(new GrObject(`Bush${i+2}_bw`,bush));
+        world.add(new GrObject(`Bush_${i+1}_bw`,bush));
     }
 //#endregion
 
 //#region Buildings from wkbk8
     let b1_1_cl = new B.GrBuilding1();
+    b1_1_cl.name = "Shed_0_cl";
     b1_1_cl.objects[0].position.set(5,b1_1_cl.objects[0].position.y,-7);
     b1_1_cl.objects[0].rotateY(Math.PI);
     world.add(b1_1_cl);
@@ -193,30 +197,33 @@ world.objects[0].objects[0].material = groundMat;
     for(let i = 0; i < 5; i++) {
         let building = b1_1_cl.objects[0].clone();
         building.translateX(-2.5*i - 2.5);
-        world.add(new GrObject(`b1_${i+2}_cl`,building));
+        world.add(new GrObject(`Shed_${i+1}_cl`,building));
     }
 
     let b1_1_bw = new B.GrBuilding1_bw();
+    b1_1_bw.name = "Shed_0_bw";
     b1_1_bw.objects[0].position.set(-5,b1_1_bw.objects[0].position.y, 7);
     world.add(b1_1_bw);
 
     for(let i = 0; i <5; i++) {
         let building = b1_1_bw.objects[0].clone();
         building.translateX(-2.5*i - 2.5);
-        world.add(new GrObject(`b1_${i+2}_bw`,building));
+        world.add(new GrObject(`Shed_${i+1}_bw`,building));
     }
 
     let b2_1_cl = new B.GrBuilding2({size:1.2,y:0.28});
+    b2_1_cl.name = "GravelRoof_0_cl"
     b2_1_cl.objects[0].position.set(5,b2_1_cl.objects[0].position.y, 3);
     world.add(b2_1_cl);
 
     for(let i = 0; i < 4; i++) {
         let building = b2_1_cl.objects[0].clone();
         building.translateX(3.125*i + 3.125);
-        world.add(new GrObject(`b2_${i+2}_cl`,building));
+        world.add(new GrObject(`GravelRoof_${i+1}_cl`,building));
     }
 
     let b2_7_cl = new B.GrBuilding2({size:1.2,y:0.28});
+    b2_7_cl.name = "GravelRoof_6_cl";
     b2_7_cl.objects[0].rotateY(Math.PI);
     b2_7_cl.objects[0].position.set(5,b2_7_cl.objects[0].position.y, 8);
     world.add(b2_7_cl);
@@ -224,20 +231,22 @@ world.objects[0].objects[0].material = groundMat;
     for(let i = 0; i < 4; i++) {
         let building = b2_7_cl.objects[0].clone();
         building.translateX(-3.125*i - 3.125);
-        world.add(new GrObject(`b2_${i+8}_cl`,building));
+        world.add(new GrObject(`GravelRoof_${i+7}_cl`,building));
     }
 
     let b2_13_cl = new B.GrBuilding2({size:1.2,y:0.28});
+    b2_13_cl.name = "GravelRoof_12_cl";
     b2_13_cl.objects[0].position.set(5,b2_13_cl.objects[0].position.y, 10);
     world.add(b2_13_cl);
 
     for(let i = 0; i < 4; i++) {
         let building = b2_13_cl.objects[0].clone();
         building.translateX(3.125*i + 3.125);
-        world.add(new GrObject(`b2_${i+14}_cl`,building));
+        world.add(new GrObject(`GravelRoof_${i+13}_cl`,building));
     }
 
     let b2_19_cl = new B.GrBuilding2({size:1.2,y:0.28});
+    b2_19_cl.name = "GravelRoof_18_cl";
     b2_19_cl.objects[0].rotateY(Math.PI);
     b2_19_cl.objects[0].position.set(5,b2_19_cl.objects[0].position.y, 15);
     world.add(b2_19_cl);
@@ -245,10 +254,11 @@ world.objects[0].objects[0].material = groundMat;
     for(let i = 0; i < 4; i++) {
         let building = b2_19_cl.objects[0].clone();
         building.translateX(-3.125*i - 3.125);
-        world.add(new GrObject(`b2_${i+20}_cl`,building));
+        world.add(new GrObject(`GravelRoof_${i+19}_cl`,building));
     }
 
     let b2_1_bw = new B.GrBuilding2_bw({size:1.2,y:0.28});
+    b2_1_bw.name = "GravelRoof_0_bw";
     b2_1_bw.objects[0].position.set(-5,b2_1_bw.objects[0].position.y, -3);
     b2_1_bw.objects[0].rotateY(Math.PI);
     world.add(b2_1_bw);
@@ -256,20 +266,22 @@ world.objects[0].objects[0].material = groundMat;
     for(let i = 0; i < 4; i++) {
         let building = b2_1_bw.objects[0].clone();
         building.translateX(3.125*i + 3.125);
-        world.add(new GrObject(`b2_${i+2}_bw`,building));
+        world.add(new GrObject(`GravelRoof_${i+1}_bw`,building));
     }
 
     let b2_7_bw = new B.GrBuilding2_bw({size:1.2,y:0.28});
+    b2_7_bw.name = "GravelRoof_6_bw";
     b2_7_bw.objects[0].position.set(-5,b2_7_bw.objects[0].position.y, -8);
     world.add(b2_7_bw);
 
     for(let i = 0; i < 4; i++) {
         let building = b2_7_bw.objects[0].clone();
         building.translateX(-3.125*i - 3.125);
-        world.add(new GrObject(`b2_${i+8}_bw`,building));
+        world.add(new GrObject(`GravelRoof_${i+7}_bw`,building));
     }
 
     let b2_13_bw = new B.GrBuilding2_bw({size:1.2,y:0.28});
+    b2_13_bw.name = "GravelRoof_12_bw";
     b2_13_bw.objects[0].position.set(-5,b2_13_bw.objects[0].position.y, -10);
     b2_13_bw.objects[0].rotateY(Math.PI);
     world.add(b2_13_bw);
@@ -277,17 +289,18 @@ world.objects[0].objects[0].material = groundMat;
     for(let i = 0; i < 4; i++) {
         let building = b2_13_bw.objects[0].clone();
         building.translateX(3.125*i + 3.125);
-        world.add(new GrObject(`b2_${i+14}_bw`,building));
+        world.add(new GrObject(`GravelRoof_${i+13}_bw`,building));
     }
 
     let b2_19_bw = new B.GrBuilding2_bw({size:1.2,y:0.28});
+    b2_19_bw.name = "GravelRoof_18_bw";
     b2_19_bw.objects[0].position.set(-5,b2_19_bw.objects[0].position.y, -15);
     world.add(b2_19_bw);
 
     for(let i = 0; i < 4; i++) {
         let building = b2_19_bw.objects[0].clone();
         building.translateX(-3.125*i - 3.125);
-        world.add(new GrObject(`b2_${i+20}_bw`,building));
+        world.add(new GrObject(`GravelRoof_${i+19}_bw`,building));
     }
 //#endregion
 
@@ -305,9 +318,9 @@ world.objects[0].objects[0].material = groundMat;
     roadbw3.position.x = -0.5;
     roadbw3.position.z = -9;
     roadbw3.position.y = 0.005;
-    world.add(new GrObject("Roadbw1",roadbw1));
-    world.add(new GrObject("Roadbw2",roadbw2));
-    world.add(new GrObject("Roadbw3",roadbw3));
+    world.add(new GrObject("Road_0_bw",roadbw1));
+    world.add(new GrObject("Road_1_bw",roadbw2));
+    world.add(new GrObject("Road_2_bw",roadbw3));
 
     let roadcl_mat = new T.MeshStandardMaterial({color:"#fc3d03"});
     let roadcl1 = new T.Mesh(road1_geom,roadcl_mat);
@@ -320,9 +333,9 @@ world.objects[0].objects[0].material = groundMat;
     roadcl3.position.x = 0.5;
     roadcl3.position.z = 9;
     roadcl3.position.y = 0.005;
-    world.add(new GrObject("Roadcl1",roadcl1));
-    world.add(new GrObject("Roadcl2",roadcl2));
-    world.add(new GrObject("Roadcl3",roadcl3));
+    world.add(new GrObject("Road_0_cl",roadcl1));
+    world.add(new GrObject("Road_1_cl",roadcl2));
+    world.add(new GrObject("Road_2_cl",roadcl3));
 //#endregion
 
 //#region Trucks
@@ -378,7 +391,7 @@ world.objects[0].objects[0].material = groundMat;
     }
     let truck_cl = new GrStep(truck1.objects[0],truck_cl_update);
     truck_cl.rideable = truck_cl.objects[0];
-    truck_cl.name = "Truck_cl";
+    truck_cl.name = "Truck_0_cl";
     let truck2 = new GrCar_bw({size:1.4, y:0.07});
     let truck_bw_update = function(time,obj) {
         let t = (time/1000) % 12;
@@ -431,7 +444,7 @@ world.objects[0].objects[0].material = groundMat;
     }
     let truck_bw = new GrStep(truck2.objects[0],truck_bw_update);
     truck_bw.rideable = truck_bw.objects[0];
-    truck_bw.name = "Truck_bw";
+    truck_bw.name = "Truck_0_bw";
     world.add(truck_cl);
     world.add(truck_bw);
     //#endregion
@@ -483,6 +496,8 @@ world.objects[0].objects[0].material = groundMat;
 
     let passenger_bw = new GrStep(passenger_bw_obj,passenger_bw_update);
     let passenger_cl = new GrStep(passenger_cl_obj,passenger_cl_update);
+    passenger_bw.name = "Passenger_0_bw";
+    passenger_cl.name = "Passenger_0_cl";
     world.add(passenger_bw);
     world.add(passenger_cl);
 //#endregion
@@ -491,7 +506,7 @@ world.objects[0].objects[0].material = groundMat;
     let front_loader_cl = new GrFrontLoader({size:0.5,x:7,z:-14});
     front_loader_cl.objects[0].rotateY(Math.PI/4);
     front_loader_cl.rideable = front_loader_cl.objects[0];
-    front_loader_cl.name = "Frontloader_cl";
+    front_loader_cl.name = "Frontloader_0_cl";
     world.add(front_loader_cl);
     let f_cl_ui = new AutoUI(front_loader_cl, 300, div, 1, true);
     f_cl_ui.set("x", 7);
@@ -501,7 +516,7 @@ world.objects[0].objects[0].material = groundMat;
     let front_loader_bw = new GrFrontLoader_bw({size:0.5,x:-7,z:14});
     front_loader_bw.objects[0].rotateY(Math.PI + Math.PI/4);
     front_loader_bw.rideable = front_loader_bw.objects[0];
-    front_loader_bw.name = "Frontloader_bw";
+    front_loader_bw.name = "Frontloader_0_bw";
     world.add(front_loader_bw);
     let f_bw_ui = new AutoUI(front_loader_bw, 300, div, 1, true);
     f_bw_ui.set("x", -7);
@@ -555,6 +570,7 @@ world.objects[0].objects[0].material = groundMat;
         obj.geometry.attributes.velocity.needsUpdate = true;
     }
     let gr_particle_system = new GrParticleSystem(particle_system, particle_update)
+    gr_particle_system.name = "ParticleSystem_0"
     world.add(gr_particle_system);
 //#endregion
 // while making your objects, be sure to identify some of them as "highlighted"
