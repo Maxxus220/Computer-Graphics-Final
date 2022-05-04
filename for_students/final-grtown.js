@@ -56,6 +56,8 @@ let div = document.getElementById("div1");
     let groundMat = shaderMaterial("./shaders/ground.vs","./shaders/ground.fs");
 //#endregion
 
+let rain_tex = new T.TextureLoader().load("./images/raindrop.png");
+
 // make the world
 let world = new GrWorld({
     width: 800,
@@ -504,6 +506,56 @@ world.objects[0].objects[0].material = groundMat;
     f_bw_ui.set("x", -7);
     f_bw_ui.set("z", 14);
     f_bw_ui.set("theta",315);
+//#endregion
+
+//#region Rain particles
+    let particleCount = 9000;
+    let particles = new T.BufferGeometry();
+    let particle_pos = new Float32Array(particleCount * 3);
+    for(let i = 0; i < particleCount * 3; i++) {
+        switch(i % 3){
+            case 0:
+            case 2:
+                particle_pos[i] = Math.random() * 40 - 20;
+                break;
+            case 1:
+                particle_pos[i] = 17;
+                break;
+        }
+    }
+    let particle_vy = new Float32Array(particleCount)
+    for(let i = 0; i < particleCount; i++) {
+        particle_vy[i] = -(Math.random() * 0.5 + 0.25);
+    }
+    particles.setAttribute("position",new T.BufferAttribute(particle_pos,3));
+    particles.setAttribute("velocity", new T.BufferAttribute(particle_vy,1));
+    let particle_mat = new T.PointsMaterial({
+        size:0.7,
+        color:"#C4D3DF",
+        map:rain_tex,
+        transparent:true
+    })
+    let particle_system = new T.Points(particles,particle_mat);
+    let particle_update = function(time, obj) {
+        let position = obj.geometry.attributes.position.array;
+        let velocity = obj.geometry.attributes.velocity.array;
+        for(let i = 0; i < particleCount; i++) {
+            if(position[i*3 + 1] <= 0) {
+                position[i*3] = Math.random()*40 - 20;
+                position[i*3 + 1] = 17;
+                position[i*3 + 2] = Math.random()*40 - 20;
+                velocity[i] = -(Math.random() * 0.5 + 0.25);
+            }
+            else {
+                position[i*3 + 1] = position[i*3 + 1] + velocity[i]
+            }
+        }
+        obj.geometry.attributes.position.needsUpdate = true;
+        obj.geometry.attributes.velocity.needsUpdate = true;
+    }
+    let GrParticleSystem = new GrStep(particle_system, particle_update)
+    GrParticleSystem.name = "Particle_system";
+    world.add(GrParticleSystem);
 //#endregion
 // while making your objects, be sure to identify some of them as "highlighted"
 
