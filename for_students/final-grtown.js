@@ -31,6 +31,7 @@ import {main} from "../examples/main.js";
 import { GrCar } from "./car.js";
 import { GrCar_bw } from "./car.js";
 import { GrFrontLoader, GrFrontLoader_bw } from "./front_loader.js";
+import { GrParticleSystem } from "./GrParticleSystem.js";
 
 /**m
  * The Graphics Town Main -
@@ -536,7 +537,7 @@ world.objects[0].objects[0].material = groundMat;
         transparent:true
     })
     let particle_system = new T.Points(particles,particle_mat);
-    let particle_update = function(time, obj) {
+    let particle_update = function(delta, obj) {
         let position = obj.geometry.attributes.position.array;
         let velocity = obj.geometry.attributes.velocity.array;
         for(let i = 0; i < particleCount; i++) {
@@ -547,15 +548,14 @@ world.objects[0].objects[0].material = groundMat;
                 velocity[i] = -(Math.random() * 0.5 + 0.25);
             }
             else {
-                position[i*3 + 1] = position[i*3 + 1] + velocity[i]
+                position[i*3 + 1] = position[i*3 + 1] + velocity[i]*delta/15;
             }
         }
         obj.geometry.attributes.position.needsUpdate = true;
         obj.geometry.attributes.velocity.needsUpdate = true;
     }
-    let GrParticleSystem = new GrStep(particle_system, particle_update)
-    GrParticleSystem.name = "Particle_system";
-    world.add(GrParticleSystem);
+    let gr_particle_system = new GrParticleSystem(particle_system, particle_update)
+    world.add(gr_particle_system);
 //#endregion
 // while making your objects, be sure to identify some of them as "highlighted"
 
