@@ -508,7 +508,7 @@ world.objects[0].objects[0].material = groundMat;
     f_bw_ui.set("theta",315);
 //#endregion
 
-//#region Rain particles
+//#region Rain particle system
     let particleCount = 9000;
     let particles = new T.BufferGeometry();
     let particle_pos = new Float32Array(particleCount * 3);

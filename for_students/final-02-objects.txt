@@ -1,16 +1,17 @@
 (Required) Two kinds of objects created for this assignment:
-1. Skyscraper
-2. Bush
+1. Skyscraper - Large buildings each have bumpmaps both black and white and colored variations
+2. Bush - Bush with a bumpmap created by desaturating the image and smoothing the colors a bit
 
 (Required) Five other kinds of objects that you created (possibly in previous assignments):
-3. Road
-4. Building with red roof
-5. Building with gravel roof
-6. Trucks
-7. Passengers
+All or almost all objects have had an additional black and white variation created for them
+3. Road - Simple short box geometry
+4. Building with red roof - Bulding from wkbk 8 adapted by adding bumpmaps to the roof and brick textures using similar desaturation technique
+5. Building with gravel roof - Building from wkbk 8 adapted by adding bumpmaps same technique
+6. Trucks - Truck from wkbk 8
+7. Passengers - Simple box geometries
 
 (Optional) Backup Objects (more objects that you created, in case the ones above don't count):
-- Frontloader
+- Frontloader - Construction object from wkbk 8
 - ???
 - ???
 
@@ -20,10 +21,10 @@ Vehicle: Car
 Natural Element: Bush
 
 Object loaded from a model file:
-Model: Car
+Model: Car - Car obj found online attribution in attributions txt file
 
 An object with a shader that you wrote:
-ShaderObj: Car/groundplane
+ShaderObj: Car/groundplane - Both car and groundplane have similar shaders. Car checks world position for color. Groundplane checks uv for color.
 
 Other Objects that you would like to note:
 ???
