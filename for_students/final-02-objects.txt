@@ -8,7 +8,7 @@ All or almost all objects have had an additional black and white variation creat
 4. Building with red roof - Bulding from wkbk 8 adapted by adding bumpmaps to the roof and brick textures using similar desaturation technique
 5. Building with gravel roof - Building from wkbk 8 adapted by adding bumpmaps same technique
 6. Trucks - Truck from wkbk 8
-7. Passengers - Simple box geometries
+7. Passengers - Icon like passenger created in blender loaded from obj file
 
 (Optional) Backup Objects (more objects that you created, in case the ones above don't count):
 - Road - Simple short box geometry

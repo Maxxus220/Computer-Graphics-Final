@@ -7,7 +7,7 @@ One behavior that is not simple:
 Not simple: Trucks in multiple part path then picks up passengers
 
 Animated Articulated Figure:
-Articulated: Frontloader
+Articulated: Frontloader - animated to move with articulated motion by itself
 
 Other Behaviors that you made: (backup in case something above doesn't count)
 - Rain falling

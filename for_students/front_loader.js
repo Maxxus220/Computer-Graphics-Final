@@ -109,6 +109,7 @@ export class GrFrontLoader extends GrObject {
     this.frontloader = frontloader;
     this.armRot = armsRot;
     this.loadRot = loadRot;
+    this.time = 0;
   }
 
   update(paramValues) {
@@ -117,6 +118,40 @@ export class GrFrontLoader extends GrObject {
     this.frontloader.rotation.y = degreesToRadians(paramValues[2]);
     this.armRot.rotation.x = Math.PI/4 - degreesToRadians(paramValues[3]);  
     this.loadRot.rotation.x = -Math.PI/4 - degreesToRadians(paramValues[4]);
+  }
+
+  stepWorld(delta,timeofday) {
+    this.time += delta;
+    let t = (this.time/1000) % 8;
+    if(t >= 0 && t < 2) {
+      t = t/2;
+      this.frontloader.position.x = (1-t) * 7 + t * 10;
+      this.frontloader.position.z = (1-t) * -14 + t * -11;
+    }
+    else if(t >= 2 && t < 3) {
+      t = t-2;
+      this.armRot.rotation.x = (1-t) * Math.PI/4 + t * Math.PI/3.7;
+      this.loadRot.rotation.x = (1-t) * -Math.PI/4 + t * -Math.PI/6
+    }
+    else if(t >= 3 && t < 4) {
+      t = t-3;
+      this.armRot.rotation.x = (1-t) * Math.PI/3.7 + t * Math.PI/10;
+      this.loadRot.rotation.x = (1-t) * -Math.PI/6 + t * -Math.PI/3;
+    }
+    else if(t >= 4 && t < 6) {
+      t = (t-4)/2;
+      this.frontloader.position.x = (1-t) * 10 + t * 7;
+      this.frontloader.position.z = (1-t) * -11 + t *  -14;
+    }
+    else if(t >= 6 && t < 7) {
+      t = t-6;
+      this.loadRot.rotation.x = (1-t) * -Math.PI/3 + t * Math.PI/14;
+    }
+    else if(t >= 7 && t < 8) {
+      t = t-7;
+      this.armRot.rotation.x = (1-t) * Math.PI/10 + t * Math.PI/4;
+      this.loadRot.rotation.x = (1-t) * Math.PI/14 + t * -Math.PI/4;
+    }
   }
 }
 
@@ -219,6 +254,7 @@ export class GrFrontLoader_bw extends GrObject {
     this.frontloader = frontloader;
     this.armRot = armsRot;
     this.loadRot = loadRot;
+    this.time = 0;
   }
 
   update(paramValues) {
@@ -227,5 +263,39 @@ export class GrFrontLoader_bw extends GrObject {
     this.frontloader.rotation.y = degreesToRadians(paramValues[2]);
     this.armRot.rotation.x = Math.PI/4 - degreesToRadians(paramValues[3]);  
     this.loadRot.rotation.x = -Math.PI/4 - degreesToRadians(paramValues[4]);
+  }
+
+  stepWorld(delta,timeofday) {
+    this.time += delta;
+    let t = (this.time/1000) % 8;
+    if(t >= 0 && t < 2) {
+      t = t/2;
+      this.frontloader.position.x = (1-t) * -7 + t * -10;
+      this.frontloader.position.z = (1-t) * 14 + t * 11;
+    }
+    else if(t >= 2 && t < 3) {
+      t = t-2;
+      this.armRot.rotation.x = (1-t) * Math.PI/4 + t * Math.PI/3.7;
+      this.loadRot.rotation.x = (1-t) * -Math.PI/4 + t * -Math.PI/6
+    }
+    else if(t >= 3 && t < 4) {
+      t = t-3;
+      this.armRot.rotation.x = (1-t) * Math.PI/3.7 + t * Math.PI/10;
+      this.loadRot.rotation.x = (1-t) * -Math.PI/6 + t * -Math.PI/3;
+    }
+    else if(t >= 4 && t < 6) {
+      t = (t-4)/2;
+      this.frontloader.position.x = (1-t) * -10 + t * -7;
+      this.frontloader.position.z = (1-t) * 11 + t * 14;
+    }
+    else if(t >= 6 && t < 7) {
+      t = t-6;
+      this.loadRot.rotation.x = (1-t) * -Math.PI/3 + t * Math.PI/14;
+    }
+    else if(t >= 7 && t < 8) {
+      t = t-7;
+      this.armRot.rotation.x = (1-t) * Math.PI/10 + t * Math.PI/4;
+      this.loadRot.rotation.x = (1-t) * Math.PI/14 + t * -Math.PI/4;
+    }
   }
 }
