@@ -68,6 +68,79 @@ let world = new GrWorld({
 });
 world.objects[0].objects[0].material = groundMat;
 
+//#region Passengers
+    //let passengerGeom = new T.BoxBufferGeometry(0.2,0.6,0.2);
+    let passenger_bw_mat = new T.MeshStandardMaterial({color:new T.Color(0.07,0.07,0.07)});
+    let passenger_cl_mat = new T.MeshStandardMaterial({color:"red"});
+
+    //let passenger_bw_obj = new T.Mesh(passengerGeom,passenger_bw_mat);
+    //let passenger_cl_obj = new T.Mesh(passengerGeom,passenger_cl_mat);
+    let passenger_obj_loader = new OBJLoader();
+    passenger_obj_loader.load("./objects/passenger.obj",function(object) {
+        object.position.y = 0.15;
+        object.scale.set(0.15,0.15,0.15);
+        let passenger_bw_update = function(time,obj) {
+            let t = (time/1000) % 12;
+            if(t >= 0 && t < 0.5) {
+                t = t*2;
+                obj.visible = true;
+                obj.position.x = -17.5;
+                obj.position.z = -3.5 * (1-t) + -5 * t; 
+            }
+            else if(t >= 6 && t < 7) {
+                obj.visible = true;
+                t = t-6;
+                obj.position.x = -17.5;
+                obj.position.z = -12.25 * (1-t) + -10.5 * t; 
+            }
+            else {
+                obj.visible = false;
+            }
+        }
+        object.traverse( function( child ) {
+            if ( child instanceof T.Mesh ) {
+                child.material = passenger_bw_mat;
+            }
+        })
+        let passenger_bw = new GrStep(object,passenger_bw_update);
+        passenger_bw.name = "Passenger_0_bw";
+        world.add(passenger_bw);
+    })
+
+    passenger_obj_loader.load("./objects/passenger.obj",function(object) {
+        object.position.y = 0.15;
+        object.scale.set(0.15,0.15,0.15);
+        let passenger_cl_update = function(time,obj) {
+            let t = (time/1000) % 12;
+            if(t >= 0 && t < 0.5) {
+                t = t*2;
+                obj.visible = true;
+                obj.position.x = 17.5;
+                obj.position.z = 3.5 * (1-t) + 5 * t; 
+            }
+            else if(t >= 6 && t < 7) {
+                obj.visible = true;
+                t = t-6;
+                obj.position.x = 17.5;
+                obj.position.z = 12.25 * (1-t) + 10.5 * t; 
+            }
+            else {
+                obj.visible = false;
+            }
+        }
+        object.traverse( function( child ) {
+            if ( child instanceof T.Mesh ) {
+                child.material = passenger_cl_mat;
+            }
+        })
+        let passenger_cl = new GrStep(object,passenger_cl_update);
+        passenger_cl.name = "Passenger_0_cl";
+        world.add(passenger_cl);
+    })
+    // passenger_bw_obj.position.y = 0.3;
+    // passenger_cl_obj.position.y = 0.3;
+//#endregion
+
 //#region Car
     let carMat = shaderMaterial("./shaders/car.vs","./shaders/car.fs");
     let carLoader = new OBJLoader();
@@ -449,59 +522,6 @@ world.objects[0].objects[0].material = groundMat;
     world.add(truck_cl);
     world.add(truck_bw);
     //#endregion
-
-//#region Passengers
-    let passengerGeom = new T.BoxBufferGeometry(0.2,0.6,0.2);
-    let passenger_bw_mat = new T.MeshStandardMaterial({color:new T.Color(0.07,0.07,0.07)});
-    let passenger_cl_mat = new T.MeshStandardMaterial({color:"red"});
-
-    let passenger_bw_obj = new T.Mesh(passengerGeom,passenger_bw_mat);
-    let passenger_cl_obj = new T.Mesh(passengerGeom,passenger_cl_mat);
-    passenger_bw_obj.position.y = 0.3;
-    passenger_cl_obj.position.y = 0.3;
-
-    let passenger_bw_update = function(time,obj) {
-        let t = (time/1000) % 12;
-        if(t >= 0 && t < 1) {
-            obj.visible = true;
-            obj.position.x = -17.5;
-            obj.position.z = -3.5 * (1-t) + -5 * t; 
-        }
-        else if(t >= 6 && t < 7) {
-            obj.visible = true;
-            t = t-6;
-            obj.position.x = -17.5;
-            obj.position.z = -12.25 * (1-t) + -10.5 * t; 
-        }
-        else {
-            obj.visible = false;
-        }
-    }
-    let passenger_cl_update = function(time,obj) {
-        let t = (time/1000) % 12;
-        if(t >= 0 && t < 1) {
-            obj.visible = true;
-            obj.position.x = 17.5;
-            obj.position.z = 3.5 * (1-t) + 5 * t; 
-        }
-        else if(t >= 6 && t < 7) {
-            obj.visible = true;
-            t = t-6;
-            obj.position.x = 17.5;
-            obj.position.z = 12.25 * (1-t) + 10.5 * t; 
-        }
-        else {
-            obj.visible = false;
-        }
-    }
-
-    let passenger_bw = new GrStep(passenger_bw_obj,passenger_bw_update);
-    let passenger_cl = new GrStep(passenger_cl_obj,passenger_cl_update);
-    passenger_bw.name = "Passenger_0_bw";
-    passenger_cl.name = "Passenger_0_cl";
-    world.add(passenger_bw);
-    world.add(passenger_cl);
-//#endregion
 
 //#region FrontLoaders
     let front_loader_cl = new GrFrontLoader({size:0.5,x:7,z:-14});
