@@ -25,4 +25,4 @@ The workbook content is Copyright &copy; 2022, Michael Gleicher.
 
 This workbook is provided under a Creative Commons Attribution-NonCommercial 4.0 International license. See https://creativecommons.org/licenses/by-nc/4.0/ for the explanation and https://creativecommons.org/licenses/by-nc/4.0/legalcode for the license itself.
 
-This assignment was a very open ended exercise to display our understanding of things learned throughout the course. You can view the assignment at https://maxxus220.github.io/Computer-Graphics-Final/
+This assignment was a very open ended exercise to display our understanding of things learned throughout the course. You can view the assignment at https://maxxus220.github.io/Computer-Graphics-Final/. The final result can be found at https://maxxus220.github.io/Computer-Graphics-Final/for_students/final-grtown.html
